@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+</head>
+<body>
+    {{>header}}
+    <h2>Registration Form</h2>
+    
+    <form action="/user/create" method="POST">
+       {{>user_add}}
+        <!-- Submit Button -->
+        <button type="submit">Register</button>
+    </form>
+
+</body>
+ {{>footer}}
+</html>
