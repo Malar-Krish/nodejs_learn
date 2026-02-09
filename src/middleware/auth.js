@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 import {User} from '../model/user.js';
+import 'dotenv/config';
 
 export const auth = async (req,res,next) => {
     try{
         const api_token=req.header('api-token');
         console.log(api_token)
-        const decoded = jwt.verify(api_token,'nodejslearning');
+        const decoded = jwt.verify(api_token,process.env.JWT_SECRET);
         console.log(decoded._id)
         const user = await User.findOne({_id:decoded._id, 'tokens.token':api_token});
 

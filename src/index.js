@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import {userRoutes} from './routes/userRoutes.js'
 import {taskRoutes} from './routes/taskRoutes.js'
 import { uploadRoutes } from './routes/uploadRoutes.js';
+import 'dotenv/config';
 
 const app = express()
 const PORT = process.env.PORT || 3000
