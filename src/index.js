@@ -6,6 +6,7 @@ import flash from 'express-flash';
 import chalk from 'chalk'
 import {userRoutes} from './routes/userRoutes.js'
 import {taskRoutes} from './routes/taskRoutes.js'
+import { uploadRoutes } from './routes/uploadRoutes.js';
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true })); 
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(flash());
+app.use('/public', express.static('public'));
 
 app.use((req, res, next) => {
     res.locals.success_msg = chalk.green.bold(req.flash('success_msg'));
@@ -23,6 +25,7 @@ const router =new express.Router()
 app.use(router)
 app.use(userRoutes);
 app.use(taskRoutes);
+app.use(uploadRoutes);
 
 const public_path=path.join(import.meta.dirname,'../public')
 const views_path = path.join(import.meta.dirname, '../templates/views');

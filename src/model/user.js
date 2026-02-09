@@ -54,7 +54,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required : true
     }
-    }]
+    }],
+    img_url : {
+        type : Buffer
+    }
 }, { timestamps: true }); // Automatically adds createdAt and updatedAt
 
 // 2. pre and post works before and after the event and hash the password before saving
