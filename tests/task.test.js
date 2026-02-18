@@ -1,23 +1,22 @@
 import request from 'supertest';
 import app from '../src/app.js'; 
+import {userOne,userOneId,setupDatabase} from './fixtures/test_db.js';
 
-let token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OTg0MzJhMzUxYWZjODQwMTQ0MTljODYiLCJpYXQiOjE3NzEwNDM4OTN9.N9-KJnHYxyXsUsEWrRpnysAtX4mQL9uydlTm4KFZHJI";
+beforeEach(setupDatabase);
 
 describe('POST /task/save', () => {
-  const mockInvoice = {
+  const mockTask = {
     name: "nodejs unit test",
     description : "testing nodejs",
     user_id : "697dd2cd235b98a979d2031a"
   };
 
-  it('should save a new invoice and return 200', async () => {
+  it('should save a new task and return 200', async () => {
     const response = await request(app)
       .post('/task/save')
-      .send(mockInvoice)
-      .set('api-token',token)
+      .send(mockTask)
+      .set('api-token',userOne.tokens[0].token)
       .set('Accept', 'application/json');
-
-      console.log(response.body.task._id)
 
     expect(response.status).toBe(200);
     expect(response.body.task).toHaveProperty('_id');
